@@ -59,6 +59,11 @@ export default function Quiz() {
     setAnswer("");
   };
 
+  const decodeHtmlEntities = (str: String) => {
+    const parser = new DOMParser();
+    const decodedString = parser.parseFromString(`<!doctype html><body>${str}`, 'text/html').body.textContent;
+    return decodedString;
+  }
   return (
     <section className="flex flex-col justify-center items-center p-20 ">
       {questions?.length ? (
@@ -149,8 +154,3 @@ export default function Quiz() {
   );
 }
 
-function decodeHtmlEntities(str: String) {
-  const parser = new DOMParser();
-  const decodedString = parser.parseFromString(`<!doctype html><body>${str}`, 'text/html').body.textContent;
-  return decodedString;
-}
